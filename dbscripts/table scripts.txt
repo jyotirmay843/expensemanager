@@ -1,0 +1,126 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.12
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Feb 04, 2015 at 02:11 AM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.11
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `app_ang_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_contacts`
+--
+
+CREATE TABLE IF NOT EXISTS `app_contacts` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `mob` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_dates`
+--
+
+CREATE TABLE IF NOT EXISTS `app_dates` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `date` bigint(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `date` (`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_expenses`
+--
+
+CREATE TABLE IF NOT EXISTS `app_expenses` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `dateid` bigint(10) NOT NULL,
+  `amount` bigint(10) NOT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `lastupdate` bigint(10) NOT NULL,
+  `groupid` bigint(10) DEFAULT NULL,
+  `expensesforotherid` bigint(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `app_expenses`
+--
+
+INSERT INTO `app_expenses` (`id`, `dateid`, `amount`, `desc`, `lastupdate`, `groupid`, `expensesforotherid`) VALUES
+(1, 0, 0, '0', 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_expenses_for_other`
+--
+
+CREATE TABLE IF NOT EXISTS `app_expenses_for_other` (
+  `id` bigint(10) NOT NULL,
+  `dateid` bigint(10) NOT NULL,
+  `amount` bigint(10) NOT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `contactid` bigint(10) NOT NULL,
+  `lastupdate` bigint(10) NOT NULL DEFAULT '0',
+  `expenseid` bigint(10) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_expenses_from_other`
+--
+
+CREATE TABLE IF NOT EXISTS `app_expenses_from_other` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `dateid` bigint(10) NOT NULL,
+  `amount` bigint(10) NOT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `lastupdate` bigint(10) NOT NULL,
+  `contactid` bigint(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_group_trans`
+--
+
+CREATE TABLE IF NOT EXISTS `app_group_trans` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `dateid` bigint(10) NOT NULL,
+  `amount` bigint(10) NOT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `lastupdate` bigint(10) NOT NULL,
+  `membersid` bigint(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
